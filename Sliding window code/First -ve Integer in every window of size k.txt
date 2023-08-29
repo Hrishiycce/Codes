@@ -1,0 +1,41 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<int> firstNegativeInteger(vector < int > &arr, int k, int n) {
+    vector < int > ans;
+    int firstIndex = 0;
+    int firstElement;
+    // Traverse in all (n-k+1) windows.
+    for (int i = k - 1; i < n; i++) {
+        // Skip out of window and positive elements.
+        while ((firstIndex < i) && (firstIndex <= i - k || arr[firstIndex] > 0)) {
+            firstIndex++;
+        }
+        // Check if a negative element is found, otherwise use 0.
+        if (arr[firstIndex] > 0) {
+            firstElement = 0;
+        } else {
+            firstElement = arr[firstIndex];
+        }
+
+        ans.push_back(firstElement);
+    }
+    return ans;
+}
+int main(){
+    int n;
+    cin>>n;
+    vector<int> a(n);
+    for(int i=0; i<n; i++) {
+        cin>>a[i];
+    }
+    int k;
+    cin>>k;// size of window
+    vector<int> v(n);
+    v=firstNegativeInteger(a,k,n);
+    for(int i=0; i<v.size(); i++) {
+        cout<<v[i]<<" ";
+    }
+
+    return 0;
+}
